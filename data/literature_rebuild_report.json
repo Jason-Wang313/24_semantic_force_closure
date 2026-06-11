@@ -1,0 +1,6 @@
+{
+  "raw_records": 11776,
+  "unique_normalized_titles": 6734,
+  "matrix_rows": 1000,
+  "source": "C:\\Users\\wangz\\robotics_60_paper_batch\\24_semantic_force_closure\\data\\openalex_literature_raw.jsonl"
+}
