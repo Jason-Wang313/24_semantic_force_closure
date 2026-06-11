@@ -6,5 +6,5 @@
   "summary_trials": 720,
   "adversarial_checks_passed": true,
   "downloads_pdf_exists": true,
-  "desktop_pdf_exists": false
+  "desktop_pdf_exists": true
 }

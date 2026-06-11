@@ -24,7 +24,7 @@
 
 12. GitHub URL/status: https://github.com/Jason-Wang313/24_semantic_force_closure
 
-13. Visible Desktop PDF copy status: pending orchestrator copy
+13. Visible Desktop PDF copy status: present at C:\Users\wangz\OneDrive\Desktop\24.pdf
 
 ## Build Status Excerpt
 
@@ -42,3 +42,10 @@ PDF copied to C:\Users\wangz\Downloads\24.pdf
 Build finished at 2026-06-11T19:46:28.3481741+01:00
 
 ```
+
+## Orchestrator Desktop Copy
+
+Checked: 2026-06-11 19:49:12 +01:00
+Downloads PDF: C:/Users/wangz/Downloads/24.pdf
+Desktop PDF: C:/Users/wangz/OneDrive/Desktop/24.pdf
+Result: manual recovery copy script exit 0 log C:\Users\wangz\robotics_60_paper_batch\logs\desktop_copy_24_manual_20260611_194908.log
