@@ -8,7 +8,7 @@ Current facts:
 - `docs/related_work_matrix.csv` has 1000 data rows.
 - LP-based SFC simulator completed 720 trials with adversarial check passed: True.
 - Downloads PDF exists: True.
-- Desktop PDF status: pending orchestrator copy.
+- Desktop PDF status: present at C:\Users\wangz\OneDrive\Desktop\24.pdf.
 - GitHub URL/status: https://github.com/Jason-Wang313/24_semantic_force_closure.
 
 Recovery steps:
