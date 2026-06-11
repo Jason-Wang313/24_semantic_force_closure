@@ -1,0 +1,10 @@
+{
+  "matrix_rows": 1000,
+  "serious_skim_rows": 300,
+  "deep_read_rows": 240,
+  "hostile_rows": 100,
+  "summary_trials": 720,
+  "adversarial_checks_passed": true,
+  "downloads_pdf_exists": true,
+  "desktop_pdf_exists": false
+}

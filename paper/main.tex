@@ -1,0 +1,55 @@
+
+\documentclass{article}
+\usepackage{iclr2026_conference,times}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage{hyperref}
+\usepackage{url}
+
+\title{Semantic Force Closure: Task-Legal Contact Certificates for Robotic Grasping}
+\author{Anonymous Authors}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Robotic grasping often treats semantics as a pre-filter or post-filter around a geometric force-closure test. That separation is unsafe for task-oriented manipulation: a grasp can be geometrically force closed because it touches a blade, rim, screen, nozzle, stem, or tip that the task explicitly forbids. We introduce Semantic Force Closure (SFC), a certificate that deletes task-forbidden contact-role wrench generators before checking whether the origin remains in the convex hull of the surviving generators. In a deterministic planar contact study over six manipulation tasks and 720 trials, geometric force closure succeeds in all trials, while SFC succeeds in only 65.4\%. The resulting 34.6\% geometric optimism gap exposes failures that semantic-only contact acceptance and post-hoc filtering both miss. SFC is intentionally a small mechanism: it changes the certificate witness, not the perception backbone.
+\end{abstract}
+
+\section{Introduction}
+Task-oriented grasping has two obligations that are usually separated. It must be mechanically stable, and it must touch the object in task-legal places. Classical force closure addresses the first obligation with wrench geometry; semantic grasping and affordance grounding address the second with part labels, language-conditioned rankings, or masks. The problem is that the two modules do not commute. A certificate found using all contacts can rely on a forbidden part, and removing that part after the fact may destroy the wrench balance.
+
+We call the desired certificate Semantic Force Closure. Given contact roles and a task legality set, SFC removes every wrench generator attached to a forbidden role before running the force-closure feasibility check. This turns semantics from a score into a constraint on the certificate witness.
+
+\section{Related Work}
+The closest mechanical literature studies force closure, grasp quality, and convex or LMI-style grasp analysis. The closest semantic literature studies functional grasping, affordance grounding, contact semantic maps, and task-oriented dexterous grasp datasets \citep{lit001,lit003,lit004,lit007,lit008,lit009,lit011,lit012}. These works make semantic contact selection increasingly strong, but the common pattern is still to rank candidates before a geometric check or filter them after a geometric witness has already been chosen. SFC uses the same underlying mechanics but changes the order of operations.
+
+\section{Semantic Force Closure}
+Let each contact role be $r_i$ and each contact have a linearized friction cone with wrench generators $w_{ij}\in\mathbb{R}^3$. Let $A(\tau)$ be the set of roles allowed by task $\tau$. The SFC certificate is feasible when there are nonnegative coefficients $\lambda_{ij}$ such that
+\[
+\sum_{i:r_i\in A(\tau)} \sum_j \lambda_{ij} w_{ij}=0,\qquad
+\sum_{i:r_i\in A(\tau)} \sum_j \lambda_{ij}=1.
+\]
+This is the usual convex-hull force-closure test after semantic deletion. Because the allowed generator set is a subset of the geometric generator set, SFC implies geometric force closure in the same model. The reverse implication does not hold.
+
+\section{Experiment}
+We simulate planar rigid-body contacts for six task families: knife handoff, mug serving, phone pickup, spray bottle use, apple picking, and scissors passing. Each object has allowed roles and forbidden roles. Some trials bias allowed contacts into mechanically poor arcs while forbidden contacts remain mechanically attractive. For every trial we compare geometric force closure using all contacts, SFC using only allowed contacts, semantic-only acceptance, and post-hoc acceptance of the geometric witness.
+
+\section{Results}
+Table~\ref{tab:results} reports rates over 720 deterministic trials. Geometric force closure succeeds in every trial, but SFC succeeds in 65.4\%. The geometric optimism gap is 34.6\%, and post-hoc filtering misses alternative allowed-only certificates in 65.4\% of all trials. The adversarial monotonicity check found zero cases where SFC succeeded while geometric force closure failed.
+
+\begin{table}[t]
+\centering
+\caption{Rates in percent. FC any is ordinary geometric force closure. SFC is force closure after task-forbidden contact roles are removed.}
+\label{tab:results}
+\input{results_table.tex}
+\end{table}
+
+\section{Discussion and Limitations}
+SFC is not a replacement for perception or trajectory optimization. It assumes contact-role labels and uses a planar linearized friction model. Its value is diagnostic: it identifies when a grasp proposal is mechanically stable only because it uses a task-illegal contact. A full system should combine SFC with uncertainty over roles, tactile verification, and multi-step planning.
+
+\section{Conclusion}
+Semantic grasping should change the contact certificate, not only the ranking around it. Semantic Force Closure is a small certificate-level mechanism that exposes a concrete optimism gap between geometric stability and task-legal stability.
+
+\bibliography{references}
+\bibliographystyle{iclr2026_conference}
+\end{document}
