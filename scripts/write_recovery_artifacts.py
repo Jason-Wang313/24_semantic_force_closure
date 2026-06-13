@@ -18,7 +18,10 @@ PAPER = ROOT / "paper"
 RESULTS = ROOT / "results"
 DATA = ROOT / "data"
 DOWNLOADS_PDF = Path.home() / "Downloads" / "24.pdf"
-DESKTOP_PDF = Path.home() / "OneDrive" / "Desktop" / "24.pdf"
+DESKTOP_PDFS = [
+    Path.home() / "OneDrive" / "Desktop" / "24.pdf",
+    Path.home() / "Desktop" / "24.pdf",
+]
 REPO_NAME = "24_semantic_force_closure"
 TITLE = "Semantic Force Closure: Task-Legal Contact Certificates for Robotic Grasping"
 
@@ -146,6 +149,13 @@ def scenario_lines(summary: dict[str, object]) -> list[str]:
     return lines
 
 
+def role_noise_item(role_noise: list[dict[str, object]], error_rate: float) -> dict[str, object]:
+    for item in role_noise:
+        if abs(float(item.get("role_error_rate", -1.0)) - error_rate) < 1e-9:
+            return item
+    return {}
+
+
 def write_bibliography(lit: list[dict[str, object]]) -> list[str]:
     wanted = [1, 3, 4, 7, 8, 9, 11, 12, 15, 18, 43, 48, 55, 57]
     keys: list[str] = []
@@ -171,8 +181,15 @@ def write_bibliography(lit: list[dict[str, object]]) -> list[str]:
     return keys
 
 
-def write_docs(lit: list[dict[str, object]], summary: dict[str, object], checks: dict[str, object]) -> None:
+def write_docs(
+    lit: list[dict[str, object]],
+    summary: dict[str, object],
+    checks: dict[str, object],
+    role_noise: list[dict[str, object]],
+) -> None:
     counts = literature_counts()
+    role_noise_10 = role_noise_item(role_noise, 0.10)
+    role_noise_30 = role_noise_item(role_noise, 0.30)
     top_lines = []
     for i, item in enumerate(lit[:30], 1):
         top_lines.append(f"{i}. {item_year(item)} | cites {item_cites(item)} | {item_title(item)} | {item_venue(item)}")
@@ -280,11 +297,15 @@ def write_docs(lit: list[dict[str, object]], summary: dict[str, object], checks:
         f"- Overall geometric FC rate is {100 * float(summary.get('geometric_fc_rate', 0)):.1f}%, while SFC rate is {100 * float(summary.get('semantic_force_closure_rate', 0)):.1f}%.\n"
         f"- The geometric optimism gap is {100 * float(summary.get('geometric_optimism_gap_rate', 0)):.1f}% across the deterministic trial set.\n"
         "- The evidence includes counterexample records and an adversarial monotonicity check.\n\n"
+        "## V2 Role-Noise Stress\n\n"
+        f"- At 10% role-label error, true-legal observed SFC falls to {100 * float(role_noise_10.get('observed_sfc_true_legal_rate', 0)):.1f}% and unsafe false certificates rise to {100 * float(role_noise_10.get('unsafe_false_certificate_rate', 0)):.1f}%.\n"
+        f"- At 30% role-label error, unsafe false certificates rise to {100 * float(role_noise_30.get('unsafe_false_certificate_rate', 0)):.1f}%.\n\n"
         "## Plausible But Not Fully Proven\n\n"
         "- SFC can be inserted into larger dexterous grasp planners as a certificate layer.\n"
         "- Contact-role witnesses may improve debugging of task-oriented grasp proposals.\n\n"
         "## Unsupported\n\n"
-        "- No hardware generalization, learned perception accuracy, or real-time whole-body planning claim is supported.",
+        "- No hardware generalization, learned perception accuracy, or real-time whole-body planning claim is supported.\n"
+        "- No robustness to noisy semantic role labels is claimed without uncertainty-aware certification.",
     )
 
     write(
@@ -294,7 +315,8 @@ def write_docs(lit: list[dict[str, object]], summary: dict[str, object], checks:
         "- Contact semantics are provided by the simulator rather than inferred from perception.\n"
         "- The LP certificate checks a linearized friction cone model and does not address compliance, rolling, or dynamic slip.\n"
         "- The current comparison is conceptual: geometric FC, semantic-only acceptance, and post-hoc filtering, not a tuned learned grasp baseline.\n"
-        "- The paper should not oversell novelty over classical force-closure mathematics; the novelty is where semantics enter the certificate.",
+        "- The paper should not oversell novelty over classical force-closure mathematics; the novelty is where semantics enter the certificate.\n"
+        "- V2 role-noise stress shows that noisy role labels can create unsafe false certificates; the method needs calibrated perception or uncertainty-aware deletion.",
     )
 
     write(
@@ -307,19 +329,30 @@ def write_docs(lit: list[dict[str, object]], summary: dict[str, object], checks:
                 "hostile_rows": counts["hostile"],
                 "summary_trials": summary.get("total_trials", 0),
                 "adversarial_checks_passed": checks.get("passed", False),
+                "role_noise_stress_rows": len(role_noise),
+                "role_noise_10pct_unsafe_false_certificate_rate": role_noise_10.get("unsafe_false_certificate_rate"),
+                "role_noise_30pct_unsafe_false_certificate_rate": role_noise_30.get("unsafe_false_certificate_rate"),
+                "role_noise_stress_table_exists": (RESULTS / "role_noise_stress_table.tex").exists(),
                 "downloads_pdf_exists": DOWNLOADS_PDF.exists(),
-                "desktop_pdf_exists": DESKTOP_PDF.exists(),
+                "downloads_pdf_size_bytes": DOWNLOADS_PDF.stat().st_size if DOWNLOADS_PDF.exists() else 0,
+                "desktop_pdf_exists": any(path.exists() for path in DESKTOP_PDFS),
+                "local_paper_pdf_exists": (PAPER / "main.pdf").exists(),
             },
             indent=2,
         ),
     )
 
 
-def write_paper(summary: dict[str, object], keys: list[str]) -> None:
+def write_paper(summary: dict[str, object], keys: list[str], role_noise: list[dict[str, object]]) -> None:
     total = str(summary.get("total_trials", 0))
     sfc_rate = f"{100 * float(summary.get('semantic_force_closure_rate', 0)):.1f}"
     gap_rate = f"{100 * float(summary.get('geometric_optimism_gap_rate', 0)):.1f}"
     posthoc_rate = f"{100 * float(summary.get('posthoc_miss_rate', 0)):.1f}"
+    role_noise_10 = role_noise_item(role_noise, 0.10)
+    role_noise_10_legal = f"{100 * float(role_noise_10.get('observed_sfc_true_legal_rate', 0)):.1f}"
+    role_noise_10_unsafe = f"{100 * float(role_noise_10.get('unsafe_false_certificate_rate', 0)):.1f}"
+    role_noise_30 = role_noise_item(role_noise, 0.30)
+    role_noise_30_unsafe = f"{100 * float(role_noise_30.get('unsafe_false_certificate_rate', 0)):.1f}"
     citations = ",".join(keys[:8]) if keys else "lit001"
 
     tex = r"""
@@ -335,8 +368,11 @@ def write_paper(summary: dict[str, object], keys: list[str]) -> None:
 \begin{document}
 \maketitle
 
+\paragraph{Submission-hardening version: v2.}
+This revision adds a role-label noise stress test for the assumed semantic perception layer. At 10\% role-label error, true-legal observed SFC falls to @@ROLE10LEGAL@@\% and unsafe false certificates rise to @@ROLE10UNSAFE@@\%, so the claim is conditional on reliable role labels or uncertainty-aware certification.
+
 \begin{abstract}
-Robotic grasping often treats semantics as a pre-filter or post-filter around a geometric force-closure test. That separation is unsafe for task-oriented manipulation: a grasp can be geometrically force closed because it touches a blade, rim, screen, nozzle, stem, or tip that the task explicitly forbids. We introduce Semantic Force Closure (SFC), a certificate that deletes task-forbidden contact-role wrench generators before checking whether the origin remains in the convex hull of the surviving generators. In a deterministic planar contact study over six manipulation tasks and @@TOTAL@@ trials, geometric force closure succeeds in all trials, while SFC succeeds in only @@SFC_RATE@@\%. The resulting @@GAP_RATE@@\% geometric optimism gap exposes failures that semantic-only contact acceptance and post-hoc filtering both miss. SFC is intentionally a small mechanism: it changes the certificate witness, not the perception backbone.
+Robotic grasping often treats semantics as a pre-filter or post-filter around a geometric force-closure test. That separation is unsafe for task-oriented manipulation: a grasp can be geometrically force closed because it touches a blade, rim, screen, nozzle, stem, or tip that the task explicitly forbids. We introduce Semantic Force Closure (SFC), a certificate that deletes task-forbidden contact-role wrench generators before checking whether the origin remains in the convex hull of the surviving generators. In a deterministic planar contact study over six manipulation tasks and @@TOTAL@@ trials, geometric force closure succeeds in all trials, while SFC succeeds in only @@SFC_RATE@@\%. The resulting @@GAP_RATE@@\% geometric optimism gap exposes failures that semantic-only contact acceptance and post-hoc filtering both miss. A v2 role-noise stress narrows the claim: at 10\% role-label error, unsafe false certificates rise to @@ROLE10UNSAFE@@\%. SFC is intentionally a small mechanism: it changes the certificate witness, not the perception backbone.
 \end{abstract}
 
 \section{Introduction}
@@ -368,8 +404,18 @@ Table~\ref{tab:results} reports rates over @@TOTAL@@ deterministic trials. Geome
 \input{results_table.tex}
 \end{table}
 
+\paragraph{V2 role-label noise stress.}
+The main experiment assumes correct contact-role labels. To attack that assumption, we corrupt observed role labels before semantic deletion while judging whether the resulting certificate is legal under the true roles. Table~\ref{tab:role-noise} shows a hard boundary: noisy labels can make the observed SFC rate rise while true-legal SFC falls. At 10\% role-label error, unsafe false certificates appear in @@ROLE10UNSAFE@@\% of trials; at 30\%, they rise to @@ROLE30UNSAFE@@\%. SFC therefore needs calibrated semantic perception or an uncertainty-aware certificate that refuses contacts with ambiguous task legality.
+
+\begin{table}[t]
+\centering
+\caption{V2 role-label noise stress. Observed SFC is computed after corrupting role labels; true-legal SFC checks whether the returned witness uses only truly allowed contacts.}
+\label{tab:role-noise}
+\input{role_noise_stress_table.tex}
+\end{table}
+
 \section{Discussion and Limitations}
-SFC is not a replacement for perception or trajectory optimization. It assumes contact-role labels and uses a planar linearized friction model. Its value is diagnostic: it identifies when a grasp proposal is mechanically stable only because it uses a task-illegal contact. A full system should combine SFC with uncertainty over roles, tactile verification, and multi-step planning.
+SFC is not a replacement for perception or trajectory optimization. It assumes contact-role labels and uses a planar linearized friction model. The v2 role-noise stress shows that bad labels can turn SFC into an unsafe false certificate, so a deployed version should reason over role uncertainty rather than deleting contacts from point estimates. Its value is diagnostic: it identifies when a grasp proposal is mechanically stable only because it uses a task-illegal contact. A full system should combine SFC with uncertainty over roles, tactile verification, and multi-step planning.
 
 \section{Conclusion}
 Semantic grasping should change the contact certificate, not only the ranking around it. Semantic Force Closure is a small certificate-level mechanism that exposes a concrete optimism gap between geometric stability and task-legal stability.
@@ -383,14 +429,25 @@ Semantic grasping should change the contact certificate, not only the ranking ar
     tex = tex.replace("@@GAP_RATE@@", gap_rate)
     tex = tex.replace("@@POSTHOC_RATE@@", posthoc_rate)
     tex = tex.replace("@@CITATIONS@@", citations)
+    tex = tex.replace("@@ROLE10LEGAL@@", role_noise_10_legal)
+    tex = tex.replace("@@ROLE10UNSAFE@@", role_noise_10_unsafe)
+    tex = tex.replace("@@ROLE30UNSAFE@@", role_noise_30_unsafe)
     write(PAPER / "main.tex", tex)
 
 
-def write_readme_and_status(summary: dict[str, object], checks: dict[str, object]) -> None:
+def write_readme_and_status(
+    summary: dict[str, object],
+    checks: dict[str, object],
+    role_noise: list[dict[str, object]],
+) -> None:
     url = repo_url()
+    desktop_copies = [path for path in DESKTOP_PDFS if path.exists()]
     desktop_status = (
-        f"present at {DESKTOP_PDF}" if DESKTOP_PDF.exists() else "pending orchestrator copy"
+        "absent (expected; canonical PDF stays in Downloads)"
+        if not desktop_copies
+        else "present at " + ", ".join(str(path) for path in desktop_copies)
     )
+    downloads_size = DOWNLOADS_PDF.stat().st_size if DOWNLOADS_PDF.exists() else 0
     write(
         ROOT / "README.md",
         "# Semantic Force Closure\n\n"
@@ -410,6 +467,7 @@ def write_readme_and_status(summary: dict[str, object], checks: dict[str, object
         "- `docs/hostile_prior_work.md`: 100-paper hostile prior-work set.\n"
         "- `results/semantic_force_closure_trials.csv`: deterministic trial rows.\n"
         "- `results/summary.json`: aggregate evidence.\n"
+        "- `results/role_noise_stress_summary.json`: v2 role-label noise stress.\n"
         "- `paper/main.tex`: anonymous ICLR-style manuscript.\n"
         "- `docs/final_audit.md`: required final audit.\n",
     )
@@ -418,14 +476,17 @@ def write_readme_and_status(summary: dict[str, object], checks: dict[str, object
     write(
         ROOT / "child_status.md",
         "# Child Status\n\n"
-        "Stage: manual recovery complete or in final publication steps\n\n"
+        "Stage: v2 submission-hardening complete for terminal workshop-only decision\n\n"
         "Current facts:\n"
         "- Attempt 2 failed because the original simulator used an expensive nested force-closure enumeration and timed out before producing a PDF.\n"
         "- Recovered without deleting the valid OpenAlex cache or related-work matrix.\n"
         "- `docs/related_work_matrix.csv` has 1000 data rows.\n"
         f"- LP-based SFC simulator completed {summary.get('total_trials', 0)} trials with adversarial check passed: {checks.get('passed', False)}.\n"
+        f"- V2 role-noise stress rows: {len(role_noise)}.\n"
         f"- Downloads PDF exists: {DOWNLOADS_PDF.exists()}.\n"
+        f"- Downloads PDF size: {downloads_size} bytes.\n"
         f"- Desktop PDF status: {desktop_status}.\n"
+        f"- Local paper/main.pdf exists: {(PAPER / 'main.pdf').exists()}.\n"
         f"- GitHub URL/status: {url}.\n\n"
         "Recovery steps:\n"
         "- Stopped the orphaned long-running Python simulator.\n"
@@ -448,12 +509,13 @@ def write_readme_and_status(summary: dict[str, object], checks: dict[str, object
         "5. Closest hostile prior work: classical grasp-quality and force-closure metrics, LMI grasp analysis, semantic grasping, affordance-based part recognition, ContactDexNet-style contact semantic maps, DexGraspNet-style grasp datasets, and foundation-model task-oriented grasping.\n\n"
         "6. Literature coverage: `docs/related_work_matrix.csv` contains 1000 entries; the intended tiers are 1000-paper landscape, 300-paper serious skim, 240-paper deep read, and 100-paper hostile prior-work set. Synthesis documents are in `docs/literature_map.md`, `docs/hostile_prior_work.md`, `docs/novelty_boundary_map.md`, and `docs/novelty_decision.md`.\n\n"
         "7. Proof/formal-claim status: In the local linearized friction-cone model, SFC implies ordinary geometric force closure because it is the same convex-hull feasibility test on a subset of generators. The converse is disproved by generated counterexamples. No real-robot theorem is claimed.\n\n"
-        f"8. Strongest evidence: The LP-based deterministic simulator ran {summary.get('total_trials', 0)} trials. Geometric force closure rate was {100 * float(summary.get('geometric_fc_rate', 0)):.1f}%, SFC rate was {100 * float(summary.get('semantic_force_closure_rate', 0)):.1f}%, geometric optimism gap was {100 * float(summary.get('geometric_optimism_gap_rate', 0)):.1f}%, and monotonicity violations were {checks.get('sfc_implies_geometric_fc_violations', 'unknown')}.\n\n"
-        "9. Biggest weaknesses: planar proxy only; role labels are assumed known; no perception uncertainty, compliance, rolling contact, dynamics, or real robot validation; comparisons are diagnostic baselines rather than tuned learned grasp planners.\n\n"
-        "10. Paper-readiness judgment: workshop.\n\n"
-        f"11. Exact Downloads PDF path: {DOWNLOADS_PDF} ({'present' if DOWNLOADS_PDF.exists() else 'missing'}).\n\n"
+        f"8. Strongest evidence: The LP-based deterministic simulator ran {summary.get('total_trials', 0)} trials. Geometric force closure rate was {100 * float(summary.get('geometric_fc_rate', 0)):.1f}%, SFC rate was {100 * float(summary.get('semantic_force_closure_rate', 0)):.1f}%, geometric optimism gap was {100 * float(summary.get('geometric_optimism_gap_rate', 0)):.1f}%, and monotonicity violations were {checks.get('sfc_implies_geometric_fc_violations', 'unknown')}. V2 role-noise stress shows unsafe false certificates at {100 * float(role_noise_item(role_noise, 0.10).get('unsafe_false_certificate_rate', 0)):.1f}% for 10% role-label error and {100 * float(role_noise_item(role_noise, 0.30).get('unsafe_false_certificate_rate', 0)):.1f}% for 30% role-label error.\n\n"
+        "9. Biggest weaknesses: planar proxy only; role labels are assumed known; v2 role-noise stress shows noisy labels can create unsafe false certificates; no compliance, rolling contact, dynamics, or real robot validation; comparisons are diagnostic baselines rather than tuned learned grasp planners.\n\n"
+        "10. Paper-readiness judgment: workshop-only / strong-revise.\n\n"
+        f"11. Exact Downloads PDF path: {DOWNLOADS_PDF} ({'present' if DOWNLOADS_PDF.exists() else 'missing'}, {downloads_size} bytes).\n\n"
         f"12. GitHub URL/status: {url}\n\n"
-        f"13. Visible Desktop PDF copy status: {desktop_status}\n"
+        f"13. Visible Desktop PDF copy status: {desktop_status}\n\n"
+        f"14. Local repository PDF status: paper/main.pdf {'present' if (PAPER / 'main.pdf').exists() else 'absent after canonical copy'}\n"
         + build_excerpt,
     )
 
@@ -502,11 +564,12 @@ def main() -> int:
     lit = load_literature()
     summary = read_json(RESULTS / "summary.json", {})
     checks = read_json(RESULTS / "adversarial_checks.json", {})
+    role_noise = read_json(RESULTS / "role_noise_stress_summary.json", [])
     keys = write_bibliography(lit)
-    write_docs(lit, summary, checks)
-    write_paper(summary, keys)
+    write_docs(lit, summary, checks, role_noise)
+    write_paper(summary, keys, role_noise)
     write_build_script()
-    write_readme_and_status(summary, checks)
+    write_readme_and_status(summary, checks, role_noise)
     print(json.dumps({"wrote": True, "papers": len(lit), "summary_trials": summary.get("total_trials", 0)}, indent=2))
     return 0
 

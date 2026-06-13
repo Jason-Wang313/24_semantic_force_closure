@@ -14,22 +14,24 @@
 
 7. Proof/formal-claim status: In the local linearized friction-cone model, SFC implies ordinary geometric force closure because it is the same convex-hull feasibility test on a subset of generators. The converse is disproved by generated counterexamples. No real-robot theorem is claimed.
 
-8. Strongest evidence: The LP-based deterministic simulator ran 720 trials. Geometric force closure rate was 100.0%, SFC rate was 65.4%, geometric optimism gap was 34.6%, and monotonicity violations were 0.
+8. Strongest evidence: The LP-based deterministic simulator ran 720 trials. Geometric force closure rate was 100.0%, SFC rate was 65.4%, geometric optimism gap was 34.6%, and monotonicity violations were 0. V2 role-noise stress shows unsafe false certificates at 30.7% for 10% role-label error and 67.2% for 30% role-label error.
 
-9. Biggest weaknesses: planar proxy only; role labels are assumed known; no perception uncertainty, compliance, rolling contact, dynamics, or real robot validation; comparisons are diagnostic baselines rather than tuned learned grasp planners.
+9. Biggest weaknesses: planar proxy only; role labels are assumed known; v2 role-noise stress shows noisy labels can create unsafe false certificates; no compliance, rolling contact, dynamics, or real robot validation; comparisons are diagnostic baselines rather than tuned learned grasp planners.
 
-10. Paper-readiness judgment: workshop.
+10. Paper-readiness judgment: workshop-only / strong-revise.
 
-11. Exact Downloads PDF path: C:\Users\wangz\Downloads\24.pdf (present).
+11. Exact Downloads PDF path: C:\Users\wangz\Downloads\24.pdf (present, 144906 bytes).
 
 12. GitHub URL/status: https://github.com/Jason-Wang313/24_semantic_force_closure
 
-13. Visible Desktop PDF copy status: present at C:\Users\wangz\OneDrive\Desktop\24.pdf
+13. Visible Desktop PDF copy status: absent (expected; canonical PDF stays in Downloads)
+
+14. Local repository PDF status: paper/main.pdf absent after canonical copy
 
 ## Build Status Excerpt
 
 ```
-﻿Build started at 2026-06-11T19:46:17.0497597+01:00
+﻿Build started at 2026-06-13T03:47:25.8051712+01:00
 RUN pdflatex1: pdflatex -interaction=nonstopmode -halt-on-error main.tex
 EXIT pdflatex1: 0
 RUN bibtex: bibtex main
@@ -39,13 +41,6 @@ EXIT pdflatex2: 0
 RUN pdflatex3: pdflatex -interaction=nonstopmode -halt-on-error main.tex
 EXIT pdflatex3: 0
 PDF copied to C:\Users\wangz\Downloads\24.pdf
-Build finished at 2026-06-11T19:46:28.3481741+01:00
+Build finished at 2026-06-13T03:47:43.9320735+01:00
 
 ```
-
-## Orchestrator Desktop Copy
-
-Checked: 2026-06-11 19:49:12 +01:00
-Downloads PDF: C:/Users/wangz/Downloads/24.pdf
-Desktop PDF: C:/Users/wangz/OneDrive/Desktop/24.pdf
-Result: manual recovery copy script exit 0 log C:\Users\wangz\robotics_60_paper_batch\logs\desktop_copy_24_manual_20260611_194908.log

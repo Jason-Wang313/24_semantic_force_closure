@@ -1,0 +1,72 @@
+[
+  {
+    "role_error_rate": 0.0,
+    "trials": 720,
+    "true_sfc_count": 461,
+    "true_sfc_rate": 0.6403,
+    "observed_sfc_count": 461,
+    "observed_sfc_rate": 0.6403,
+    "observed_sfc_true_legal_count": 461,
+    "observed_sfc_true_legal_rate": 0.6403,
+    "unsafe_false_certificate_count": 0,
+    "unsafe_false_certificate_rate": 0.0,
+    "missed_true_sfc_count": 0,
+    "missed_true_sfc_rate": 0.0
+  },
+  {
+    "role_error_rate": 0.05,
+    "trials": 720,
+    "true_sfc_count": 461,
+    "true_sfc_rate": 0.6403,
+    "observed_sfc_count": 503,
+    "observed_sfc_rate": 0.6986,
+    "observed_sfc_true_legal_count": 389,
+    "observed_sfc_true_legal_rate": 0.5403,
+    "unsafe_false_certificate_count": 114,
+    "unsafe_false_certificate_rate": 0.1583,
+    "missed_true_sfc_count": 3,
+    "missed_true_sfc_rate": 0.0042
+  },
+  {
+    "role_error_rate": 0.1,
+    "trials": 720,
+    "true_sfc_count": 461,
+    "true_sfc_rate": 0.6403,
+    "observed_sfc_count": 544,
+    "observed_sfc_rate": 0.7556,
+    "observed_sfc_true_legal_count": 323,
+    "observed_sfc_true_legal_rate": 0.4486,
+    "unsafe_false_certificate_count": 221,
+    "unsafe_false_certificate_rate": 0.3069,
+    "missed_true_sfc_count": 5,
+    "missed_true_sfc_rate": 0.0069
+  },
+  {
+    "role_error_rate": 0.2,
+    "trials": 720,
+    "true_sfc_count": 461,
+    "true_sfc_rate": 0.6403,
+    "observed_sfc_count": 584,
+    "observed_sfc_rate": 0.8111,
+    "observed_sfc_true_legal_count": 231,
+    "observed_sfc_true_legal_rate": 0.3208,
+    "unsafe_false_certificate_count": 353,
+    "unsafe_false_certificate_rate": 0.4903,
+    "missed_true_sfc_count": 10,
+    "missed_true_sfc_rate": 0.0139
+  },
+  {
+    "role_error_rate": 0.3,
+    "trials": 720,
+    "true_sfc_count": 461,
+    "true_sfc_rate": 0.6403,
+    "observed_sfc_count": 637,
+    "observed_sfc_rate": 0.8847,
+    "observed_sfc_true_legal_count": 153,
+    "observed_sfc_true_legal_rate": 0.2125,
+    "unsafe_false_certificate_count": 484,
+    "unsafe_false_certificate_rate": 0.6722,
+    "missed_true_sfc_count": 10,
+    "missed_true_sfc_rate": 0.0139
+  }
+]

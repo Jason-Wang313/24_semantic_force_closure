@@ -72,64 +72,25 @@ ii
 ) (main.out) (main.out)
 (C:\Users\wangz\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
 (C:\Users\wangz\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
-
-Package natbib Warning: Citation `lit001' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit003' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit004' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit007' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit008' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit009' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit011' on page 1 undefined on input line 24.
-
-
-
-Package natbib Warning: Citation `lit012' on page 1 undefined on input line 24.
-
-
-[1{C:/Users/wangz/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/wa
-ngz/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}]
-(results_table.tex) (main.bbl [2])
-
-Package natbib Warning: There were undefined citations.
-
-[3] (main.aux
-
-Package natbib Warning: Citation(s) may have changed.
-(natbib)                Rerun to get citations correct.
-
-) )<C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
-/cmex10.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmmi10.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmmi5.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/wangz/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/wangz/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/wangz/AppData/Loc
-al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/wangz/Ap
-pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/
-wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.
-pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb
-8a.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb
-8a.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
-8a.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr
-i8a.pfb>
-Output written on main.pdf (3 pages, 140444 bytes).
+Underfull \vbox (badness 7099) has occurred while \output is active [1{C:/Users
+/wangz/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/wangz/AppData
+/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] (results_table.tex)
+(role_noise_stress_table.tex) [2] (main.bbl) [3] (main.aux) )
+(see the transcript file for additional information)<C:/Users/wangz/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/wangz/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users
+/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><
+C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmr10.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmr7.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><C:/Users/wangz/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/wangz/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Users/wangz/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8a.pfb><C:/Users/wangz/AppData
+/Local/Programs/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/wangz/AppData
+/Local/Programs/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/wangz/AppData
+/Local/Programs/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
+Output written on main.pdf (3 pages, 144906 bytes).
 Transcript written on main.log.
 pdflatex: major issue: So far, you have not checked for MiKTeX updates.

@@ -11,8 +11,11 @@
 \begin{document}
 \maketitle
 
+\paragraph{Submission-hardening version: v2.}
+This revision adds a role-label noise stress test for the assumed semantic perception layer. At 10\% role-label error, true-legal observed SFC falls to 44.9\% and unsafe false certificates rise to 30.7\%, so the claim is conditional on reliable role labels or uncertainty-aware certification.
+
 \begin{abstract}
-Robotic grasping often treats semantics as a pre-filter or post-filter around a geometric force-closure test. That separation is unsafe for task-oriented manipulation: a grasp can be geometrically force closed because it touches a blade, rim, screen, nozzle, stem, or tip that the task explicitly forbids. We introduce Semantic Force Closure (SFC), a certificate that deletes task-forbidden contact-role wrench generators before checking whether the origin remains in the convex hull of the surviving generators. In a deterministic planar contact study over six manipulation tasks and 720 trials, geometric force closure succeeds in all trials, while SFC succeeds in only 65.4\%. The resulting 34.6\% geometric optimism gap exposes failures that semantic-only contact acceptance and post-hoc filtering both miss. SFC is intentionally a small mechanism: it changes the certificate witness, not the perception backbone.
+Robotic grasping often treats semantics as a pre-filter or post-filter around a geometric force-closure test. That separation is unsafe for task-oriented manipulation: a grasp can be geometrically force closed because it touches a blade, rim, screen, nozzle, stem, or tip that the task explicitly forbids. We introduce Semantic Force Closure (SFC), a certificate that deletes task-forbidden contact-role wrench generators before checking whether the origin remains in the convex hull of the surviving generators. In a deterministic planar contact study over six manipulation tasks and 720 trials, geometric force closure succeeds in all trials, while SFC succeeds in only 65.4\%. The resulting 34.6\% geometric optimism gap exposes failures that semantic-only contact acceptance and post-hoc filtering both miss. A v2 role-noise stress narrows the claim: at 10\% role-label error, unsafe false certificates rise to 30.7\%. SFC is intentionally a small mechanism: it changes the certificate witness, not the perception backbone.
 \end{abstract}
 
 \section{Introduction}
@@ -44,8 +47,18 @@ Table~\ref{tab:results} reports rates over 720 deterministic trials. Geometric f
 \input{results_table.tex}
 \end{table}
 
+\paragraph{V2 role-label noise stress.}
+The main experiment assumes correct contact-role labels. To attack that assumption, we corrupt observed role labels before semantic deletion while judging whether the resulting certificate is legal under the true roles. Table~\ref{tab:role-noise} shows a hard boundary: noisy labels can make the observed SFC rate rise while true-legal SFC falls. At 10\% role-label error, unsafe false certificates appear in 30.7\% of trials; at 30\%, they rise to 67.2\%. SFC therefore needs calibrated semantic perception or an uncertainty-aware certificate that refuses contacts with ambiguous task legality.
+
+\begin{table}[t]
+\centering
+\caption{V2 role-label noise stress. Observed SFC is computed after corrupting role labels; true-legal SFC checks whether the returned witness uses only truly allowed contacts.}
+\label{tab:role-noise}
+\input{role_noise_stress_table.tex}
+\end{table}
+
 \section{Discussion and Limitations}
-SFC is not a replacement for perception or trajectory optimization. It assumes contact-role labels and uses a planar linearized friction model. Its value is diagnostic: it identifies when a grasp proposal is mechanically stable only because it uses a task-illegal contact. A full system should combine SFC with uncertainty over roles, tactile verification, and multi-step planning.
+SFC is not a replacement for perception or trajectory optimization. It assumes contact-role labels and uses a planar linearized friction model. The v2 role-noise stress shows that bad labels can turn SFC into an unsafe false certificate, so a deployed version should reason over role uncertainty rather than deleting contacts from point estimates. Its value is diagnostic: it identifies when a grasp proposal is mechanically stable only because it uses a task-illegal contact. A full system should combine SFC with uncertainty over roles, tactile verification, and multi-step planning.
 
 \section{Conclusion}
 Semantic grasping should change the contact certificate, not only the ranking around it. Semantic Force Closure is a small certificate-level mechanism that exposes a concrete optimism gap between geometric stability and task-legal stability.

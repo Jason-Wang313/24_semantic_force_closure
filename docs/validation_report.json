@@ -5,6 +5,12 @@
   "hostile_rows": 100,
   "summary_trials": 720,
   "adversarial_checks_passed": true,
+  "role_noise_stress_rows": 5,
+  "role_noise_10pct_unsafe_false_certificate_rate": 0.3069,
+  "role_noise_30pct_unsafe_false_certificate_rate": 0.6722,
+  "role_noise_stress_table_exists": true,
   "downloads_pdf_exists": true,
-  "desktop_pdf_exists": true
+  "downloads_pdf_size_bytes": 144906,
+  "desktop_pdf_exists": false,
+  "local_paper_pdf_exists": false
 }

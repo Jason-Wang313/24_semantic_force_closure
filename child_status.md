@@ -1,14 +1,17 @@
 # Child Status
 
-Stage: manual recovery complete or in final publication steps
+Stage: v2 submission-hardening complete for terminal workshop-only decision
 
 Current facts:
 - Attempt 2 failed because the original simulator used an expensive nested force-closure enumeration and timed out before producing a PDF.
 - Recovered without deleting the valid OpenAlex cache or related-work matrix.
 - `docs/related_work_matrix.csv` has 1000 data rows.
 - LP-based SFC simulator completed 720 trials with adversarial check passed: True.
+- V2 role-noise stress rows: 5.
 - Downloads PDF exists: True.
-- Desktop PDF status: present at C:\Users\wangz\OneDrive\Desktop\24.pdf.
+- Downloads PDF size: 144906 bytes.
+- Desktop PDF status: absent (expected; canonical PDF stays in Downloads).
+- Local paper/main.pdf exists: False.
 - GitHub URL/status: https://github.com/Jason-Wang313/24_semantic_force_closure.
 
 Recovery steps:

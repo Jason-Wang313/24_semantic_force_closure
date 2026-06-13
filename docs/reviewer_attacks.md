@@ -5,3 +5,4 @@
 - The LP certificate checks a linearized friction cone model and does not address compliance, rolling, or dynamic slip.
 - The current comparison is conceptual: geometric FC, semantic-only acceptance, and post-hoc filtering, not a tuned learned grasp baseline.
 - The paper should not oversell novelty over classical force-closure mathematics; the novelty is where semantics enter the certificate.
+- V2 role-noise stress shows that noisy role labels can create unsafe false certificates; the method needs calibrated perception or uncertainty-aware deletion.
