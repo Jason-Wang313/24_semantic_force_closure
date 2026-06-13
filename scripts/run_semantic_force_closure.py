@@ -382,6 +382,104 @@ def write_counterexamples(rows: list[dict[str, object]]) -> None:
     )
 
 
+def corrupt_roles(
+    contacts: list[Contact],
+    scenario: dict[str, object],
+    rng: random.Random,
+    error_rate: float,
+) -> list[Contact]:
+    roles = list(scenario["role_arcs"].keys())
+    corrupted: list[Contact] = []
+    for contact in contacts:
+        role = contact.role
+        if rng.random() < error_rate:
+            choices = [candidate for candidate in roles if candidate != role]
+            role = rng.choice(choices)
+        corrupted.append(Contact(x=contact.x, y=contact.y, role=role, mu=contact.mu))
+    return corrupted
+
+
+def run_role_noise_stress(error_rates: Iterable[float] = (0.0, 0.05, 0.10, 0.20, 0.30)) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    scenario_names = list(SCENARIOS.keys())
+    for error_rate in error_rates:
+        for scenario_index, scenario_name in enumerate(scenario_names):
+            scenario = SCENARIOS[scenario_name]
+            allowed = set(scenario["allowed"])
+            for trial in range(TRIALS_PER_SCENARIO):
+                base_rng = random.Random(SEED * 10 + scenario_index * 1000 + trial)
+                contacts = generate_contacts(base_rng, scenario)
+                true_allowed_indices = [idx for idx, contact in enumerate(contacts) if contact.role in allowed]
+                true_sfc = force_closure_certificate(contacts, true_allowed_indices)
+
+                corrupt_rng = random.Random(SEED * 100 + int(error_rate * 1000) * 100000 + scenario_index * 1000 + trial)
+                observed_contacts = corrupt_roles(contacts, scenario, corrupt_rng, error_rate)
+                observed_allowed_indices = [
+                    idx for idx, contact in enumerate(observed_contacts) if contact.role in allowed
+                ]
+                observed_sfc = force_closure_certificate(observed_contacts, observed_allowed_indices)
+                observed_uses_true_forbidden = any(
+                    contacts[idx].role not in allowed for idx in observed_sfc.contacts
+                )
+                rows.append(
+                    {
+                        "role_error_rate": error_rate,
+                        "scenario": scenario_name,
+                        "trial_id": trial,
+                        "true_sfc": int(true_sfc.feasible),
+                        "observed_sfc": int(observed_sfc.feasible),
+                        "observed_sfc_true_legal": int(observed_sfc.feasible and not observed_uses_true_forbidden),
+                        "unsafe_false_certificate": int(observed_sfc.feasible and observed_uses_true_forbidden),
+                        "missed_true_sfc": int(true_sfc.feasible and not observed_sfc.feasible),
+                    }
+                )
+    return rows
+
+
+def summarize_role_noise(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    out: list[dict[str, object]] = []
+    for error_rate in sorted({float(row["role_error_rate"]) for row in rows}):
+        subset = [row for row in rows if abs(float(row["role_error_rate"]) - error_rate) < 1e-12]
+        n = max(1, len(subset))
+        item: dict[str, object] = {"role_error_rate": error_rate, "trials": len(subset)}
+        for key in ("true_sfc", "observed_sfc", "observed_sfc_true_legal", "unsafe_false_certificate", "missed_true_sfc"):
+            count = int(sum(int(row[key]) for row in subset))
+            item[key + "_count"] = count
+            item[key + "_rate"] = round(count / n, 4)
+        out.append(item)
+    return out
+
+
+def write_role_noise_artifacts(rows: list[dict[str, object]], summary_rows: list[dict[str, object]]) -> None:
+    path = RESULTS / "role_noise_stress.csv"
+    with path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
+        writer.writeheader()
+        writer.writerows(rows)
+    (RESULTS / "role_noise_stress_summary.json").write_text(
+        json.dumps(summary_rows, indent=2, ensure_ascii=True), encoding="utf-8"
+    )
+    lines = [
+        "\\begin{tabular}{lrrrr}",
+        "\\toprule",
+        "Role error & Observed SFC & True-legal SFC & Unsafe cert. & Missed true SFC \\\\",
+        "\\midrule",
+    ]
+    for item in summary_rows:
+        lines.append(
+            f"{100 * float(item['role_error_rate']):.0f}\\% & "
+            f"{100 * float(item['observed_sfc_rate']):.1f} & "
+            f"{100 * float(item['observed_sfc_true_legal_rate']):.1f} & "
+            f"{100 * float(item['unsafe_false_certificate_rate']):.1f} & "
+            f"{100 * float(item['missed_true_sfc_rate']):.1f} \\\\"
+        )
+    lines.extend(["\\bottomrule", "\\end{tabular}", ""])
+    table_text = "\n".join(lines)
+    (RESULTS / "role_noise_stress_table.tex").write_text(table_text, encoding="utf-8")
+    PAPER.mkdir(exist_ok=True)
+    (PAPER / "role_noise_stress_table.tex").write_text(table_text, encoding="utf-8")
+
+
 def main() -> int:
     RESULTS.mkdir(exist_ok=True)
     rng = random.Random(SEED)
@@ -409,9 +507,12 @@ def main() -> int:
     )
     write_counterexamples(rows)
     write_latex_table(summary)
+    role_noise_rows = run_role_noise_stress()
+    role_noise_summary = summarize_role_noise(role_noise_rows)
+    write_role_noise_artifacts(role_noise_rows, role_noise_summary)
     append_status(
         "experiments",
-        "Ran deterministic SFC simulator; wrote trials CSV, summary, counterexamples, adversarial checks, LaTeX table.",
+        "Ran deterministic SFC simulator plus v2 role-noise stress; wrote trials CSV, summary, counterexamples, adversarial checks, and LaTeX tables.",
     )
     print(json.dumps(summary, indent=2), flush=True)
     print(json.dumps(checks, indent=2), flush=True)
