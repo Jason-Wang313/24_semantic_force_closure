@@ -1,22 +1,27 @@
 # Reproducibility Checklist
 
 - [x] Dependencies are listed in `requirements.txt`.
-- [x] Main simulator source is `scripts/run_semantic_force_closure.py`.
-- [x] Paper/docs generator is `scripts/write_recovery_artifacts.py`.
-- [x] Main outputs are `results/semantic_force_closure_trials.csv`, `results/summary.json`, and `paper/results_table.tex`.
-- [x] V2 outputs are `results/role_noise_stress.csv`, `results/role_noise_stress_summary.json`, and `results/role_noise_stress_table.tex`.
+- [x] Legacy runner is `scripts/run_semantic_force_closure.py`.
+- [x] V3 full-scale runner is `experiments/full_scale_semantic_force_closure.py`.
+- [x] V3 outputs are under `results/full_scale/`.
+- [x] V3 figures are under `figures/full_scale/`.
+- [x] Generated V3 TeX tables are under `results/full_scale/tex/`.
 - [x] Paper source is `paper/main.tex`.
 - [x] Canonical batch PDF path is `C:/Users/wangz/Downloads/24.pdf`.
-- [x] Local `paper/main.pdf` was deleted after copying the canonical PDF to Downloads.
+- [x] Canonical PDF is verified at 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+- [x] Local `paper/main.pdf` is deleted after copying the canonical PDF to Downloads.
+- [x] The full-scale runner compiles with `python -m py_compile`.
 
 Recommended verification commands:
 
 ```powershell
-python scripts\run_semantic_force_closure.py
-python scripts\write_recovery_artifacts.py
-cd paper
+python .\experiments\full_scale_semantic_force_closure.py
+python -m py_compile .\experiments\full_scale_semantic_force_closure.py
+cd .\paper
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 bibtex main
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
 pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdfinfo .\main.pdf
+pdftotext .\main.pdf - | Select-String -Pattern 'v3 final full-scale|75,520|12,032|46.3|28.3|risk-aware|no real robot|Final Audit'
 ```

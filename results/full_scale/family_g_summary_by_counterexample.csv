@@ -1,0 +1,9 @@
+method,rows,accepted_rate,true_legal_rate,unsafe_rate,missed_true_sfc_rate,geometric_feasible_rate,oracle_sfc_feasible_rate,mean_quality_when_feasible
+abstaining_sfc,800,0.6525,0.1425,0.51,0.1737,1.0,0.3162,0.077058
+geometric_fc,800,1.0,0.0,1.0,0.3162,1.0,0.3162,0.045192
+observed_sfc,800,0.6525,0.1425,0.51,0.1737,1.0,0.3162,0.077058
+oracle_sfc,800,0.3162,0.3162,0.0,0.0,1.0,0.3162,0.06527
+posthoc_single,800,0.0,0.0,0.0,0.3162,1.0,0.3162,0.045192
+risk_aware_sfc,800,0.6525,0.1425,0.51,0.1737,1.0,0.3162,0.077058
+semantic_only,800,1.0,0.3162,0.6837,0.0,1.0,0.3162,0.0
+soft_penalty_fc,800,1.0,0.0,1.0,0.3162,1.0,0.3162,0.045192

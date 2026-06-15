@@ -14,33 +14,34 @@
 
 7. Proof/formal-claim status: In the local linearized friction-cone model, SFC implies ordinary geometric force closure because it is the same convex-hull feasibility test on a subset of generators. The converse is disproved by generated counterexamples. No real-robot theorem is claimed.
 
-8. Strongest evidence: The LP-based deterministic simulator ran 720 trials. Geometric force closure rate was 100.0%, SFC rate was 65.4%, geometric optimism gap was 34.6%, and monotonicity violations were 0. V2 role-noise stress shows unsafe false certificates at 30.7% for 10% role-label error and 67.2% for 30% role-label error.
+8. Strongest v3 evidence: The full-scale suite produced 75,520 rows over 12,032 contact cases, seed 24024, and zero plot failures. In Family A, geometric FC accepts 1.000 of cases but its active witness is true-legal in 0.000; oracle SFC certifies 0.463.
 
-9. Biggest weaknesses: planar proxy only; role labels are assumed known; v2 role-noise stress shows noisy labels can create unsafe false certificates; no compliance, rolling contact, dynamics, or real robot validation; comparisons are diagnostic baselines rather than tuned learned grasp planners.
+9. Strongest uncertainty evidence: At 10% calibrated role-label error, observed SFC has unsafe rate 0.283, while risk-aware SFC records 0.000 unsafe certificates in the threshold-0.70 calibrated slice.
 
-10. Paper-readiness judgment: workshop-only / strong-revise.
+10. Strongest negative-control evidence: All-allowed controls make SFC equal geometric FC at 1.000, no-roles controls return no SFC certificate, and geometrically infeasible controls reject.
 
-11. Exact Downloads PDF path: C:\Users\wangz\Downloads\24.pdf (present, 144906 bytes).
+11. Biggest weaknesses: synthetic planar proxy only; no hardware validation; no learned semantic perception; no tactile witness verification; no 3D hand kinematics; no dynamics, compliance, or trajectory optimization.
 
-12. GitHub URL/status: https://github.com/Jason-Wang313/24_semantic_force_closure
+12. Paper-readiness judgment: final batch artifact and submission-ready synthetic mechanism paper under the stated scope. It should not be marketed as a real-robot result or a grasp-success improvement claim.
 
-13. Visible Desktop PDF copy status: absent (expected; canonical PDF stays in Downloads)
+13. Exact Downloads PDF path: `C:/Users/wangz/Downloads/24.pdf`.
 
-14. Local repository PDF status: paper/main.pdf absent after canonical copy
+14. Downloads PDF verification: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
 
-## Build Status Excerpt
+15. GitHub URL/status: `https://github.com/Jason-Wang313/24_semantic_force_closure`.
 
-```
-﻿Build started at 2026-06-13T03:47:25.8051712+01:00
-RUN pdflatex1: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex1: 0
-RUN bibtex: bibtex main
-EXIT bibtex: 0
-RUN pdflatex2: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex2: 0
-RUN pdflatex3: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex3: 0
-PDF copied to C:\Users\wangz\Downloads\24.pdf
-Build finished at 2026-06-13T03:47:43.9320735+01:00
+16. Visible Desktop PDF copy status: absent; canonical batch artifact is in Downloads.
 
+17. Local build PDF status: `paper/main.pdf` is absent after canonical copy.
+
+## Final Build And Verification
+
+```text
+pdflatex -interaction=nonstopmode -halt-on-error main.tex -> 0
+bibtex main -> 0
+pdflatex -interaction=nonstopmode -halt-on-error main.tex -> 0
+pdflatex -interaction=nonstopmode -halt-on-error main.tex -> 0
+pdfinfo C:/Users/wangz/Downloads/24.pdf -> 25 pages
+Get-FileHash -Algorithm SHA256 C:/Users/wangz/Downloads/24.pdf -> 97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A
+pdftotext marker check -> v3 marker, row/case counts, 46.3, 28.3, risk-aware boundary, no-real-robot limitation, and final audit marker found
 ```

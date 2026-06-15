@@ -1,16 +1,58 @@
 {
-  "matrix_rows": 1000,
-  "serious_skim_rows": 300,
-  "deep_read_rows": 240,
-  "hostile_rows": 100,
-  "summary_trials": 720,
-  "adversarial_checks_passed": true,
-  "role_noise_stress_rows": 5,
-  "role_noise_10pct_unsafe_false_certificate_rate": 0.3069,
-  "role_noise_30pct_unsafe_false_certificate_rate": 0.6722,
-  "role_noise_stress_table_exists": true,
+  "stage": "v3 final full-scale complete",
+  "literature_matrix": {
+    "rows": 1000,
+    "serious_skim": 300,
+    "deep_read": 240,
+    "hostile": 100
+  },
+  "legacy_v2": {
+    "main_trials": 720,
+    "role_noise_stress_rows": 5,
+    "role_noise_10pct_unsafe_false_certificate_rate": 0.3069,
+    "role_noise_30pct_unsafe_false_certificate_rate": 0.6722
+  },
+  "full_scale_v3": {
+    "runner": "experiments/full_scale_semantic_force_closure.py",
+    "seed": 24024,
+    "policy_certificate_rows": 75520,
+    "contact_cases": 12032,
+    "plot_failures": 0,
+    "family_rows": {
+      "A_task_geometry": 16200,
+      "B_semantic_noise": 40320,
+      "C_witness_ordering": 4320,
+      "D_friction_model": 3840,
+      "E_ablations": 2520,
+      "F_negative_controls": 1920,
+      "G_counterexamples": 6400
+    },
+    "headline": {
+      "family_a_oracle_sfc_true_legal_rate": 0.463,
+      "family_a_geometric_fc_acceptance_rate": 1.0,
+      "family_a_geometric_witness_true_legal_rate": 0.0,
+      "family_b_10pct_observed_sfc_unsafe_rate": 0.283,
+      "family_b_10pct_risk_aware_sfc_unsafe_rate": 0.0
+    }
+  },
+  "final_pdf": {
+    "path": "C:/Users/wangz/Downloads/24.pdf",
+    "exists": true,
+    "pages": 25,
+    "bytes": 369669,
+    "sha256": "97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A",
+    "text_markers_verified": [
+      "v3 final full-scale",
+      "75,520",
+      "12,032",
+      "46.3",
+      "28.3",
+      "risk-aware",
+      "no real robot",
+      "Final Audit"
+    ]
+  },
+  "local_paper_pdf_exists": false,
   "downloads_pdf_exists": true,
-  "downloads_pdf_size_bytes": 144906,
-  "desktop_pdf_exists": false,
-  "local_paper_pdf_exists": false
+  "desktop_pdf_exists": false
 }

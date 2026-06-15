@@ -1,0 +1,88 @@
+{
+  "stage": "complete",
+  "seed": 24024,
+  "elapsed_seconds": 490.80137880000984,
+  "total_rows": 75520,
+  "total_cases": 12032,
+  "plot_failures": 0,
+  "families": [
+    {
+      "family": "family_a",
+      "rows": 16200,
+      "cases": 3240,
+      "seconds": 83.74786589998985
+    },
+    {
+      "family": "family_b",
+      "rows": 40320,
+      "cases": 5040,
+      "seconds": 216.04904789995635
+    },
+    {
+      "family": "family_c",
+      "rows": 4320,
+      "cases": 1440,
+      "seconds": 93.92222889995901
+    },
+    {
+      "family": "family_d",
+      "rows": 3840,
+      "cases": 768,
+      "seconds": 18.30290069995681
+    },
+    {
+      "family": "family_e",
+      "rows": 2520,
+      "cases": 360,
+      "seconds": 23.287769400049
+    },
+    {
+      "family": "family_f",
+      "rows": 1920,
+      "cases": 384,
+      "seconds": 9.775001899979543
+    },
+    {
+      "family": "family_g",
+      "rows": 6400,
+      "cases": 800,
+      "seconds": 40.1632474999642
+    }
+  ],
+  "outputs": [
+    "results\\full_scale\\counterexample_library.json",
+    "results\\full_scale\\family_a_rows.csv",
+    "results\\full_scale\\family_a_summary_by_method.csv",
+    "results\\full_scale\\family_a_summary_by_task.csv",
+    "results\\full_scale\\family_a_summary_by_trap.csv",
+    "results\\full_scale\\family_b_rows.csv",
+    "results\\full_scale\\family_b_summary_by_method.csv",
+    "results\\full_scale\\family_b_summary_by_noise.csv",
+    "results\\full_scale\\family_c_rows.csv",
+    "results\\full_scale\\family_c_summary_by_topk.csv",
+    "results\\full_scale\\family_d_rows.csv",
+    "results\\full_scale\\family_d_summary_by_model.csv",
+    "results\\full_scale\\family_e_rows.csv",
+    "results\\full_scale\\family_e_summary_by_ablation.csv",
+    "results\\full_scale\\family_f_rows.csv",
+    "results\\full_scale\\family_f_summary_by_control.csv",
+    "results\\full_scale\\family_g_rows.csv",
+    "results\\full_scale\\family_g_summary_by_counterexample.csv",
+    "results\\full_scale\\progress.json",
+    "results\\full_scale\\tex\\table_ablations.tex",
+    "results\\full_scale\\tex\\table_claim_evidence.tex",
+    "results\\full_scale\\tex\\table_friction_model.tex",
+    "results\\full_scale\\tex\\table_main_full_scale.tex",
+    "results\\full_scale\\tex\\table_negative_controls.tex",
+    "results\\full_scale\\tex\\table_semantic_noise.tex",
+    "results\\full_scale\\tex\\table_witness_ordering.tex",
+    "figures\\full_scale\\main_task_gap.pdf",
+    "figures\\full_scale\\main_task_gap.png",
+    "figures\\full_scale\\negative_controls.pdf",
+    "figures\\full_scale\\negative_controls.png",
+    "figures\\full_scale\\semantic_noise_unsafe.pdf",
+    "figures\\full_scale\\semantic_noise_unsafe.png",
+    "figures\\full_scale\\topk_posthoc.pdf",
+    "figures\\full_scale\\topk_posthoc.png"
+  ]
+}

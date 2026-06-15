@@ -1,15 +1,18 @@
 # Submission Attack Log
 
-Updated: 2026-06-13 03:41:00 +01:00
+Updated: 2026-06-15 03:31 +01:00
 
-## V2 Attack Rounds
+## V3 Attack Rounds
 
-1. **"SFC assumes perfect semantic role labels."** Added a role-label noise stress before semantic deletion.
-2. **"Noisy labels may create unsafe certificates."** Confirmed. At 10% role-label error, unsafe false certificates reach 30.7%; at 30%, they reach 67.2%.
-3. **"Observed SFC can become overconfident."** Confirmed. Observed SFC rate rises under noise while true-legal SFC falls.
-4. **"The method needs uncertainty-aware semantics."** Still unresolved; added as required next work.
-5. **"The simulator is planar and diagnostic."** Still unresolved; decision remains workshop-only / strong-revise.
+1. **"The paper is too small."** Expanded from 720 trials to 75,520 rows over 12,032 contact cases.
+2. **"SFC is just ordinary force closure."** Reframed the novelty as generator-set ordering and witness legality.
+3. **"Semantic-only acceptance may be enough."** Family A and E show semantic-only can accept unsafe non-certificate cases.
+4. **"Soft penalties can replace hard deletion."** Family A and E show soft-penalty FC can accept unsafe witnesses in the hostile protocol.
+5. **"Posthoc filtering can recover legal witnesses."** Family C confirms top-k posthoc improves, but single-witness posthoc is not equivalent to SFC.
+6. **"Role labels can be wrong."** Family B and G show observed SFC can be unsafe; risk-aware and abstaining variants are scoped guardrails.
+7. **"The result may vanish in controls."** Family F shows expected collapse under all-allowed, none-allowed, and infeasible controls.
+8. **"No hardware."** Still true and stated as a limitation.
 
 ## Terminal Assessment
 
-The recoverable overclaim was addressed by adding role-noise stress and narrowing the claim to reliable labels or uncertainty-aware certification. Remaining weaknesses require perception uncertainty, hardware validation, and stronger learned-grasp comparisons.
+The artifact is final for the batch standard: 25-page PDF, full-scale synthetic evidence, explicit positive and negative findings, verified export to Downloads, and clean scope boundaries.

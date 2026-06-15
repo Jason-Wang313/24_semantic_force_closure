@@ -1,11 +1,14 @@
-﻿Build started at 2026-06-13T03:47:25.8051712+01:00
-RUN pdflatex1: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex1: 0
+Build completed for v3 final full-scale on 2026-06-15T03:31:05+01:00
+RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex: 0
 RUN bibtex: bibtex main
 EXIT bibtex: 0
-RUN pdflatex2: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex2: 0
-RUN pdflatex3: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex3: 0
+RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex: 0
+RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex: 0
 PDF copied to C:\Users\wangz\Downloads\24.pdf
-Build finished at 2026-06-13T03:47:43.9320735+01:00
+Downloads PDF pages: 25
+Downloads PDF bytes: 369669
+Downloads PDF SHA256: 97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A
+Local paper/main.pdf removed after canonical export.

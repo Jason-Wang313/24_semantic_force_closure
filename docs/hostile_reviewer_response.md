@@ -2,16 +2,16 @@
 
 ## Main Concern
 
-The strongest objection is that SFC assumes correct semantic contact-role labels. If labels are wrong, semantic deletion can retain forbidden contacts or remove legal ones.
+The strongest objection is that SFC assumes reliable task-role labels. If a blade is mislabeled as a handle, observed SFC can certify an unsafe witness.
 
-## V2 Response
+## V3 Response
 
-We added a role-label noise stress. At 10% role-label error, true-legal observed SFC falls to 44.9% and unsafe false certificates rise to 30.7%. At 30% role-label error, unsafe false certificates rise to 67.2%.
+The v3 paper foregrounds this failure. Family B corrupts role labels and shows that at 10% calibrated label error, observed SFC has unsafe rate 0.283. Risk-aware SFC records 0.000 unsafe certificates in the threshold-0.70 calibrated slice, but the paper does not claim universal safety under uncalibrated or adversarial confidence.
 
-## Revised Claim
+## Positive Evidence
 
-SFC is a certificate-ordering mechanism for reliable or uncertainty-aware role labels. The paper no longer implies safety under noisy semantic perception.
+Family A shows the certificate-ordering gap: geometric FC accepts 1.000 of contact clouds but its active witness is true-legal in 0.000, while oracle SFC finds legal witnesses in 0.463. Semantic-only and soft-penalty baselines accept unsafe witnesses, which supports hard semantic deletion before certificate search.
 
 ## Remaining Weakness
 
-The method still needs uncertainty-aware role deletion, tactile verification, learned-grasp comparisons, and hardware validation.
+No real robot, no learned perception, no tactile witness verification, no 3D hand kinematics, and no trajectory optimization. The final claim is synthetic and certificate-level.
