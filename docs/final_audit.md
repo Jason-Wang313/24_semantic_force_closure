@@ -26,13 +26,17 @@
 
 13. Exact Downloads PDF path: `C:/Users/wangz/Downloads/24.pdf`.
 
-14. Downloads PDF verification: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+14. Downloads PDF verification: 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
 
 15. GitHub URL/status: `https://github.com/Jason-Wang313/24_semantic_force_closure`.
 
 16. Visible Desktop PDF copy status: absent; canonical batch artifact is in Downloads.
 
 17. Local build PDF status: `paper/main.pdf` is absent after canonical copy.
+
+18. VLA-style link-box audit: all 34 link annotations use one-point borders;
+    citation boxes are green, internal-reference boxes are red, no cyan boxes
+    are present, and rendered affected pages were visually inspected.
 
 ## Final Build And Verification
 
@@ -42,6 +46,6 @@ bibtex main -> 0
 pdflatex -interaction=nonstopmode -halt-on-error main.tex -> 0
 pdflatex -interaction=nonstopmode -halt-on-error main.tex -> 0
 pdfinfo C:/Users/wangz/Downloads/24.pdf -> 25 pages
-Get-FileHash -Algorithm SHA256 C:/Users/wangz/Downloads/24.pdf -> 97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A
+Get-FileHash -Algorithm SHA256 C:/Users/wangz/Downloads/24.pdf -> A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097
 pdftotext marker check -> v3 marker, row/case counts, 46.3, 28.3, risk-aware boundary, no-real-robot limitation, and final audit marker found
 ```

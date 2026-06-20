@@ -1,14 +1,16 @@
-Build completed for v3 final full-scale on 2026-06-15T03:31:05+01:00
-RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex: 0
+Build completed at 2026-06-15T03:31:00+01:00
+VLA link-box hardening rebuild completed on 2026-06-20.
+RUN pdflatex1: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex1: 0
 RUN bibtex: bibtex main
 EXIT bibtex: 0
-RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex: 0
-RUN pdflatex: pdflatex -interaction=nonstopmode -halt-on-error main.tex
-EXIT pdflatex: 0
+RUN pdflatex2: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex2: 0
+RUN pdflatex3: pdflatex -interaction=nonstopmode -halt-on-error main.tex
+EXIT pdflatex3: 0
 PDF copied to C:\Users\wangz\Downloads\24.pdf
-Downloads PDF pages: 25
-Downloads PDF bytes: 369669
-Downloads PDF SHA256: 97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A
-Local paper/main.pdf removed after canonical export.
+PDF pages: 25
+PDF bytes: 369669
+PDF SHA256: A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097
+LINK_BOXES green=25 red=9 cyan=0 borders=0_0_1 annotations=34
+Local paper/main.pdf removed after canonical copy
