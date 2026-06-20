@@ -1,5 +1,16 @@
 # Paper 24 Full-Scale Execution Plan
 
+## 2026-06-20 Visual-Hardening Addendum
+
+The final v3 manuscript was rebuilt with the explicit VLA role-model hyperref
+policy for boxed links. The Downloads artifact remains 25 pages and is now:
+
+- Path: `C:/Users/wangz/Downloads/24.pdf`
+- Size: 369,669 bytes
+- SHA256: `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`
+- Link-box inventory: green = 25, red = 9, cyan = 0, with one-point borders on
+  all 34 link annotations.
+
 ## Current Claim
 
 The current v2 paper argues that task semantics should enter the force-closure certificate itself. Semantic Force Closure (SFC) deletes task-forbidden contact-role wrench generators before checking convex-hull feasibility. This breaks the assumption that semantic grasping can rank or filter contacts outside the mechanical certificate.

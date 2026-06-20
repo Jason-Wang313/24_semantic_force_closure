@@ -1,6 +1,7 @@
 # Child Status
 
-Stage: v3 final full-scale complete
+Stage: v3 final full-scale complete; VLA link-box hardening exported and
+verified.
 
 Current facts:
 - V3 plan was written first in `docs/full_scale_execution_plan.md`.
@@ -10,7 +11,9 @@ Current facts:
 - Final manuscript source is `paper/main.tex` and contains the marker `v3 final full-scale`.
 - Final LaTeX build completed with pdflatex, bibtex, pdflatex, pdflatex all exiting 0.
 - Final PDF was exported to `C:/Users/wangz/Downloads/24.pdf`.
-- Verified final PDF: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+- Verified final PDF: 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
+- Final PDF link boxes: green citations = 25, red internal references = 9,
+  cyan = 0, with one-point borders on all 34 link annotations.
 - Final PDF text check found the v3 marker, 75,520 rows, 12,032 cases, 46.3 oracle SFC result, 28.3 observed-SFC unsafe result, risk-aware boundary, no-real-robot limitation, and final audit marker.
 - Local `paper/main.pdf` was removed after export.
 - GitHub URL/status: `https://github.com/Jason-Wang313/24_semantic_force_closure`.

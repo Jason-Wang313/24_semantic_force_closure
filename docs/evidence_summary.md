@@ -7,7 +7,9 @@
 - Plot failures: 0.
 - Runner: `experiments/full_scale_semantic_force_closure.py`.
 - Final PDF: `C:/Users/wangz/Downloads/24.pdf`.
-- Final PDF verification: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+- Final PDF verification: 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
+- Final PDF link boxes: green citations = 25, red internal references = 9,
+  cyan = 0, with one-point borders on all 34 link annotations.
 
 ## Headline Numbers
 

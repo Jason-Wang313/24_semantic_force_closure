@@ -5,7 +5,9 @@ Decision: ready as a final full-scale synthetic mechanism paper under the stated
 ## Why It Is Ready For The Batch Standard
 
 - Final manuscript is 25 pages and exported to `C:/Users/wangz/Downloads/24.pdf`.
-- Final PDF is verified: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+- Final PDF is verified: 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
+- VLA-style link boxes are verified: green citations, red internal references,
+  no cyan boxes, one-point borders.
 - V3 suite contains 75,520 policy/certificate rows over 12,032 contact cases with zero plot failures.
 - The paper includes task/geometry, semantic noise, witness ordering, friction/model, ablation, negative-control, and counterexample families.
 - The manuscript states no real robot, no perception, no tactile, and no trajectory-planning claims.

@@ -10,7 +10,10 @@ Task semantics should enter the force-closure certificate by deleting task-forbi
 
 - Stage: v3 final full-scale complete.
 - Final PDF: `C:/Users/wangz/Downloads/24.pdf`.
-- Final PDF verification: 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+- Final PDF verification: 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
+- Link-box audit: VLA-style one-point boxes are explicit; citation links use
+  green boxes, internal references use red boxes, and no cyan URL boxes are
+  present.
 - Full-scale runner: `experiments/full_scale_semantic_force_closure.py`.
 - Full-scale suite: 75,520 policy/certificate rows over 12,032 contact cases, seed 24024, zero plot failures.
 - Local build PDF policy: `paper/main.pdf` is removed after the canonical copy is exported to Downloads.

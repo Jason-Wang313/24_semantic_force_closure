@@ -1,6 +1,6 @@
 # Submission Attack Log
 
-Updated: 2026-06-15 03:31 +01:00
+Updated: 2026-06-20
 
 ## V3 Attack Rounds
 
@@ -12,6 +12,10 @@ Updated: 2026-06-15 03:31 +01:00
 6. **"Role labels can be wrong."** Family B and G show observed SFC can be unsafe; risk-aware and abstaining variants are scoped guardrails.
 7. **"The result may vanish in controls."** Family F shows expected collapse under all-allowed, none-allowed, and infeasible controls.
 8. **"No hardware."** Still true and stated as a limitation.
+9. **"The PDF visual artifact is inconsistent with the VLA role model."**
+   Response: added explicit VLA-style boxed-link policy, rebuilt the Downloads
+   PDF, inventoried all link annotations, and inspected rendered affected
+   pages.
 
 ## Terminal Assessment
 

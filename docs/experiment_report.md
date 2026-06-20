@@ -29,4 +29,5 @@ Single-witness posthoc filtering fails in the main stress protocol because the s
 
 ## Final Artifact
 
-The final PDF exported to `C:/Users/wangz/Downloads/24.pdf` is 25 pages, 369,669 bytes, SHA256 `97A560CC4A30E210346B035BE8FCFFF705544D1510B2DACE5B08C71D641E544A`.
+The final PDF exported to `C:/Users/wangz/Downloads/24.pdf` is 25 pages, 369,669 bytes, SHA256 `A96EB09B4F6204ED53597C519B982F941D8BA87DD200F98028042BB7E3B68097`.
+Its VLA-style link-box audit has 25 green citation boxes, 9 red internal-reference boxes, no cyan boxes, and one-point borders on all 34 link annotations.
